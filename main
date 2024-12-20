@@ -805,8 +805,10 @@ void DisplayFunc(void)
 	door();
 	//fan ben trai
 	lights(13.5, 1.15, -2.6, 4.5, 1.2, 1.9, 1);
-	sofa(1.9f, -1.0f, -1.5f, 1.2f, 1.2f, 1.9f,2.0f);
-	vebansofa(1.0, 0.0,-1.5, 1.6, 1.2, 1.2,2);
+	sofa(1.9f, -1.0f, -1.8f, 1.2f, 1.2f, 1.9f,2.0f);
+	vebansofa(1.0, 0.0,-1.7, 1.6, 1.2, 1.2,2);
+	sofa(0.6f, -1.0f, -3.0f, 1.0f, 1.0f, 1.0f, -180);
+	sofa(0.6f, -1.0f, -0.5f, 1.0f, 1.0f, 1.0f, -1);
 	quat(1.25,2.9,-3.5);
 	windowns(-2.5, 0.975, -5.5, 0.95, 1.6, 1.65, windown_rotate[windown1], 1);
 	//camera
