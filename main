@@ -676,7 +676,7 @@ void drawSofa() {
 }
 void sofa(float tx, float ty, float tz, float sx, float sy, float sz, int j) {
 	mvstack.push(model_mat_cpp);
-	model_mat_cpp = model_mat_cpp * translate(vec3(work_sofa, -0.1, work_sofa)) * translate(vec3(tx, ty, tz)) * scale(vec3(sx, sy, sz)) * rotate_y(360 / j);
+	model_mat_cpp = model_mat_cpp * translate(vec3(work_sofa, -0.1, work_sofa)) * translate(vec3(tx, ty, tz)) * scale(vec3(sx, sy, sz)) * rotate_y(-180 / j);
 	drawSofa();
 	model_mat_cpp = mvstack.pop();
 }
@@ -735,7 +735,7 @@ void DisplayFunc(void)
 	door();
 	//fan ben trai
 	lights(13.5, 1.15, -2.6, 4.5, 1.2, 1.9, 1);
-	sofa(-1.0f, -1.0f, -6.0f, 1.2f, 1.2f, 1.9f,1.0f);
+	sofa(1.9f, -1.0f, -1.5f, 1.2f, 1.2f, 1.9f,2.0f);
 	quat(1.25,2.9,-3.5);
 	windowns(-2.5, 0.975, -5.5, 0.95, 1.6, 1.65, windown_rotate[windown1], 1);
 	//camera
