@@ -640,39 +640,47 @@ GLfloat work_sofa = 0.0;
 void drawSofa() {
 	mvstack.push(model_mat_cpp);
 
-	// Draw the seat
-	setInt("color", 17); // Set color for the seat
-	model_mat_cpp = model_mat_cpp * translate(vec3(0, 0, 0)) * scale(vec3(1.5, 0.1, 0.7)); // Adjust size
+	//ngồi
+	setInt("color", 17); 
+	model_mat_cpp = model_mat_cpp * translate(vec3(0, 0.1, 0)) * scale(vec3(1.5, 0.2, 0.7)); // Adjust size
 	cube(); // Draw the seat
 	model_mat_cpp = mvstack.pop();
 
-	// Draw the backrest
+	// đệm ngồi
 	mvstack.push(model_mat_cpp);
-	model_mat_cpp = model_mat_cpp * translate(vec3(0, 0.5, -0.35)) * scale(vec3(1.5, 0.5, 0.1)); // Adjust size and position
+	setInt("color", 18); // Set color for the seat
+	model_mat_cpp = model_mat_cpp * translate(vec3(0, 0.25, 0.05)) * scale(vec3(1.3, 0.1, 0.6)); // Adjust size
+	cube(); // Draw the seat
+	model_mat_cpp = mvstack.pop();
+
+	// tựa lưng
+	mvstack.push(model_mat_cpp);
+	model_mat_cpp = model_mat_cpp * translate(vec3(0, 0.4, -0.3)) * scale(vec3(1.5, 0.6, 0.1)); // Adjust size and position
 	setInt("color", 17); // Set color for the backrest
 	cube(); // Draw the backrest
 	model_mat_cpp = mvstack.pop();
 
-	// Draw the left armrest
+	// vịn trái
 	mvstack.push(model_mat_cpp);
-	model_mat_cpp = model_mat_cpp * translate(vec3(-0.8, 0.25, 0)) * scale(vec3(0.1, 0.5, 0.7)); // Adjust size and position
+	model_mat_cpp = model_mat_cpp * translate(vec3(-0.7, 0.35, 0)) * scale(vec3(0.1, 0.35, 0.7)); // Adjust size and position
 	setInt("color", 17); // Set color for the left armrest
 	cube(); // Draw the left armrest
 	model_mat_cpp = mvstack.pop();
 
-	// Draw the right armrest
+	// vịn phải
 	mvstack.push(model_mat_cpp);
-	model_mat_cpp = model_mat_cpp * translate(vec3(0.8, 0.25, 0)) * scale(vec3(0.1, 0.5, 0.7)); // Adjust size and position
+	model_mat_cpp = model_mat_cpp * translate(vec3(0.7, 0.35, 0)) * scale(vec3(0.1, 0.35, 0.7)); // Adjust size and position
 	setInt("color", 17); // Set color for the right armrest
 	cube(); // Draw the right armrest
 	model_mat_cpp = mvstack.pop();
 }
 void sofa(float tx, float ty, float tz, float sx, float sy, float sz, int j) {
 	mvstack.push(model_mat_cpp);
-	model_mat_cpp = model_mat_cpp * translate(vec3(work_sofa, 0.0, work_sofa)) * translate(vec3(tx, ty, tz)) * scale(vec3(sx, sy, sz)) * rotate_y(360 / j);
+	model_mat_cpp = model_mat_cpp * translate(vec3(work_sofa, -0.1, work_sofa)) * translate(vec3(tx, ty, tz)) * scale(vec3(sx, sy, sz)) * rotate_y(360 / j);
 	drawSofa();
 	model_mat_cpp = mvstack.pop();
 }
+
 //==============================================================Hết tạo các đối tượng==============================
 //-------------------------------
 void DisplayFunc(void)
