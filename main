@@ -680,7 +680,77 @@ void sofa(float tx, float ty, float tz, float sx, float sy, float sz, int j) {
 	drawSofa();
 	model_mat_cpp = mvstack.pop();
 }
+#pragma region Ve cai bansofa
+namespace bansofa {
+	void matbansofa() {
+		mvstack.push(model_mat_cpp);
+		setInt("color", 2);
+		mat4 instance = identity_mat4();
+		instance = translate(vec3(0.0, 0.5, 0.6/ 2.0)) *
+			scale(vec3(1, 0.05, 0.6));
 
+		mat4 model_torso = model_mat_cpp * instance;
+
+		glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, model_torso.m);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		model_mat_cpp = mvstack.pop();
+	}
+	void chanbansofa()
+	{
+		mvstack.push(model_mat_cpp);
+		setInt("color", 10);
+		mat4 instance = identity_mat4();
+		instance = translate(vec3(0, 0.5 / 2.0, 0)) * scale(vec3(0.2, 0.5, 0.2));
+
+		mat4 model_left_upper_arm = model_mat_cpp * instance;
+
+		glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, model_left_upper_arm.m);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		model_mat_cpp = mvstack.pop();
+	}
+	void vebansofa() {
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(0, -1, 0));
+		bansofa::matbansofa();
+
+		// Chan ban 1
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(-1 / 2.0 + 0.2, 0, 0.2));
+		bansofa::chanbansofa();
+		model_mat_cpp = mvstack.pop();
+
+		// chan ban 2
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(-1 / 2.0 + 0.2, 0, 0.6 - 0.2));
+		bansofa::chanbansofa();
+		model_mat_cpp = mvstack.pop();
+
+	
+		// Chan ban 3
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(1 / 2.0 - 0.2, 0, 0.2));
+		bansofa::chanbansofa();
+		model_mat_cpp = mvstack.pop();
+
+		// chan ban 4
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(1 / 2.0 - 0.2, 0, 0.6 - 0.2));
+		bansofa::chanbansofa();
+		model_mat_cpp = mvstack.pop();
+
+		model_mat_cpp = mvstack.pop();
+		 
+	}
+}
+void vebansofa(float tx, float ty, float tz, float sx, float sy, float sz,int j) {
+		mvstack.push(model_mat_cpp);
+		model_mat_cpp = model_mat_cpp * translate(vec3(tx, ty, tz)) * scale(vec3(sx, sy, sz))*rotate_y(-180 / j);
+		bansofa::vebansofa();
+		model_mat_cpp = mvstack.pop();
+
+	}
 //==============================================================Hết tạo các đối tượng==============================
 //-------------------------------
 void DisplayFunc(void)
@@ -736,6 +806,7 @@ void DisplayFunc(void)
 	//fan ben trai
 	lights(13.5, 1.15, -2.6, 4.5, 1.2, 1.9, 1);
 	sofa(1.9f, -1.0f, -1.5f, 1.2f, 1.2f, 1.9f,2.0f);
+	vebansofa(1.0, 0.0,-1.5, 1.6, 1.2, 1.2,2);
 	quat(1.25,2.9,-3.5);
 	windowns(-2.5, 0.975, -5.5, 0.95, 1.6, 1.65, windown_rotate[windown1], 1);
 	//camera
